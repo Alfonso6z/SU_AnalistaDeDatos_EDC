@@ -63,5 +63,6 @@ def main():
     
     a1 = Alumno("Pedro", "González", "A1B2C3")
     print(a1)
+
 if __name__ == "__main__":
     main()

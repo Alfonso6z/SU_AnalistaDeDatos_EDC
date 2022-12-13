@@ -27,6 +27,8 @@ def main():
     
     print(p2)
     print(animal1)
-    
+    print("---------------------------------------")
+    print(p3.nombre)
+    p3.edad = 18
 if __name__ == "__main__":
     main()
