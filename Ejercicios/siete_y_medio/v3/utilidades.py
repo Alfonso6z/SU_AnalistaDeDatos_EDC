@@ -1,11 +1,20 @@
 import random
 import art
+from jugadorDeSiete import JugadorDeSiete
+from carta import Carta
+import os
 cartas = [
         ("As♠",1),("2♠",2),("3♠",3),("4♠",4),("5♠",5),("6♠",6),("7♠",7),("10♠",0.5),("11♠",0.5),("12♠",0.5),
         ("As♡ ",1),("2♡ ",2),("3♡ ",3),("4♡ ",4),("5♡ ",5),("6♡ ",6),("7♡ ",7),("10♡ ",0.5),("11♡ ",0.5),("12♡ ",0.5),
         ("As♢",1),("2♢",2),("3♢",3),("4♢",4),("5♢",5),("6♢",6),("7♢",7),("10♢",0.5),("11♢",0.5),("12♢",0.5),
         ("As♣",1),("2♣",2),("3♣",3),("4♣",4),("5♣",5),("6♣",6),("7♣",7),("10♣",0.5),("11♣",0.5),("12♣",0.5)
     ]
+
+cartaLista = []
+def crear_cartas()->list():
+    for carta in cartas:
+        cartaLista.append(Carta(carta[0], carta[1]))
+    return barajear(cartaLista)
 
 def barajear(cartas:list)->list:
     """ Barajea el maso de cartas
@@ -40,24 +49,32 @@ def crearJugador(nombre: str, humano: bool)->dict:
     }
     return jugador
 
-def imprimeMano(jugador:dict):
+def imprimeMano(Cartas:list):
     """Imprime las cartas de un jugador.
     las cartas estan en una lista de tuplas :[("As♠",1),("2♠",2)]
     Args:
         jugador (dict): recibe un diccionario que tiene una lista de cartas
     """
-    for carta in jugador["cartas"]:
-        print(carta[0],end=" ")
+    for carta in Cartas:
+        print(carta.figura,end=" ")
     print()
 
 def menu(titulo,*opciones,**mensajes):
-    arte = art.text2art(titulo,font="tarty2")
-    print(arte)
-    for i in range(len(opciones)):
-        print(f"{i+1}.- {opciones[i]}")
-    opt = int(input("Ingresa una opción: "))
-    if(0<opt<=len(opciones)):
-        return opt
-    else:
-        print("Incorrecto")
-menu("Siete y medio","Jugador vs Jugador","Jugador vs CPU","CPU vs CPU")
+    while(True):
+        os.system('cls')
+        arte = art.text2art(titulo,font="tarty2")
+        print(arte)
+        for i in range(len(opciones)):
+            print(f"{i+1}.- {opciones[i]}")
+        opt = int(input("Ingresa una opción: "))
+        if(0<opt<=len(opciones)):
+            return opt
+        else:
+            print(mensajes["error"])
+
+def crearJugador(humano):
+    cpus = ["Deep blue","Polaris","Chinpance","Niño chino"]
+    if(humano):
+        nick = input("Ingresa tu nick: ")
+        return JugadorDeSiete(nick, humano)
+    return JugadorDeSiete(cpus[random.randint(0, len(cpus)-1)], humano)

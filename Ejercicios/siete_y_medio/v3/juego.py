@@ -14,6 +14,11 @@ class Juego:
         no perder.
         """
         pass
+    
+    def __terminar(self):
+        """Verifica cuando tiene que terminar el juego
+        """
+        pass
 
 
     # getters y setters
