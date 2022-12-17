@@ -1,4 +1,5 @@
 import random
+import art
 cartas = [
         ("As♠",1),("2♠",2),("3♠",3),("4♠",4),("5♠",5),("6♠",6),("7♠",7),("10♠",0.5),("11♠",0.5),("12♠",0.5),
         ("As♡ ",1),("2♡ ",2),("3♡ ",3),("4♡ ",4),("5♡ ",5),("6♡ ",6),("7♡ ",7),("10♡ ",0.5),("11♡ ",0.5),("12♡ ",0.5),
@@ -48,3 +49,15 @@ def imprimeMano(jugador:dict):
     for carta in jugador["cartas"]:
         print(carta[0],end=" ")
     print()
+
+def menu(titulo,*opciones,**mensajes):
+    arte = art.text2art(titulo,font="tarty2")
+    print(arte)
+    for i in range(len(opciones)):
+        print(f"{i+1}.- {opciones[i]}")
+    opt = int(input("Ingresa una opción: "))
+    if(0<opt<=len(opciones)):
+        return opt
+    else:
+        print("Incorrecto")
+menu("Siete y medio","Jugador vs Jugador","Jugador vs CPU","CPU vs CPU")
